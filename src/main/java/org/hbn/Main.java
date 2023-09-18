@@ -5,7 +5,6 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import org.hbn.Entity.Employee;
 
-import java.util.Optional;
 
 public class Main {
     public static void main(String[] args) {
