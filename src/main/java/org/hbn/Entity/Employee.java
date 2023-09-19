@@ -13,19 +13,20 @@ public class Employee implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "emp_id")
-    Long id;
+    private Long id;
     @Column(name = "emp_name", length = 25)
 
-    String fname;
+    private String fname;
     @Column(name = "emp_family", length = 35)
-    String lname;
-    @Column(name = "emp_nationalCode", length = 10)
-    String nationalCode;
+    private String lname;
+    @Column(name = "emp_nationalCode", length = 10, unique = true)
+    private String nationalCode;
 
     public Employee() {
     }
 
-    public Employee(String fname, String lname, String nationalCode) throws Exceptions.InvalidEmployeeName, Exceptions.InvalidNationalCode {
+    public Employee(Long id,String fname, String lname, String nationalCode) throws Exceptions.InvalidEmployeeName, Exceptions.InvalidNationalCode {
+        this.id=id;
         setFname(fname);
         setLname(lname);
         setNationalCode(nationalCode);
@@ -72,7 +73,8 @@ public class Employee implements Serializable {
     public void setNationalCode(String nationalCode) throws Exceptions.InvalidNationalCode {
         nationalCode = nationalCode.replaceAll("[^\\d.]", "");
         CheckNationalCode checkNationalCode=new CheckNationalCode();
-        checkNationalCode.checkNationalCode(nationalCode);
+        if (!checkNationalCode.checkNationalCode(nationalCode))
+            throw new Exceptions.InvalidNationalCode("your nationalcode is invalid!!");
         this.nationalCode = nationalCode;
     }
 }

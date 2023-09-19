@@ -4,7 +4,7 @@ import org.hbn.Utils.Exceptions.Exceptions;
 
 public class CheckNationalCode {
 
-    int controlDigit=0;
+    int controlDigit = 0;
     int sum = 0;
     Float mod_result = 0.0f;
 
@@ -24,13 +24,15 @@ public class CheckNationalCode {
                 System.out.println("moderesult is  " + mod_result);
 
                 if (mod_result < 2 && controlDigit == mod_result) return true;
-                else return (11 - mod_result) == controlDigit;
+                else if ((11 - mod_result) == controlDigit) return true;
+                else
+                    return false;
             } catch (Exception e) {
                 e.getCause();
                 System.out.println(e.getMessage());
                 e.printStackTrace();
             }
         }
-        return true;
+        return false;
     }
 }
