@@ -8,7 +8,8 @@ public interface EmployeeRepository {
 
     Optional<Employee> save(Employee employee);
 
-//    Optional<Employee> getEmployeeByID(Employee employee);
+    Optional<Employee> getEmployeeByID(Long id);
 
+    void deleteEmployee(Employee employee);
 
 }
