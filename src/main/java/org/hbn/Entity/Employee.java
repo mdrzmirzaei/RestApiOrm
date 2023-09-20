@@ -22,6 +22,15 @@ public class Employee implements Serializable {
     @Column(name = "emp_nationalCode", length = 10, unique = true)
     private String nationalCode;
 
+    @Column
+    private Salary salary;
+
+    @Column
+    private Company company;
+
+    @OneToOne(mappedBy = "employee")
+    private EmployeeProfile profile;
+
     public Employee() {
     }
 
@@ -77,4 +86,6 @@ public class Employee implements Serializable {
             throw new Exceptions.InvalidNationalCode("your nationalcode is invalid!!");
         this.nationalCode = nationalCode;
     }
+
+
 }
