@@ -63,20 +63,15 @@ public class Main {
             ep.setUserName("amirza");
             ep.setEmployee(employee);
             employee.setEmployeeProfile(ep);
-            employeeRepository.save(employee);
-
-
-
 
             // set Salaries data for current employee
-            employee.setSalaryList(generatSalaries().stream().toList());
+            employee.setSalary(generatSalaries().stream().toList());
 
             //set companies data for current employee
-            employee.setCompanies(generateCompanies().stream().toList());
+            employee.setCompany(generateCompanies().stream().toList());
 
             // persist current employee with data of profile,salaries & companies
             employeeRepository.save(employee);
-
 
 /*         Employee e = new Employee();
             e.setFname("hadi");

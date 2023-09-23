@@ -17,7 +17,7 @@ public class EmployeeProfile implements Serializable {
     @Column
     private String email;
 
-    @OneToOne(cascade = {CascadeType.ALL})
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "emp_id", referencedColumnName = "emp_id")
     private Employee employee;
 

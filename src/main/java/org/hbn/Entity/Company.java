@@ -29,7 +29,7 @@ public class Company implements Serializable {
     private String country;
 
 
-    @ManyToMany(mappedBy = "companies")
+    @ManyToMany(mappedBy = "company")
     private List<Employee> employeeList=new ArrayList<>();
 
     public Company(){}
@@ -40,6 +40,7 @@ public class Company implements Serializable {
         this.city = city;
         this.state = state;
         this.country = country;
+
     }
 
 

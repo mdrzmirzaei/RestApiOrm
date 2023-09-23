@@ -25,16 +25,16 @@ public class Employee implements Serializable {
     @Column(name = "emp_nationalCode", length = 10, unique = true)
     private String nationalCode;
 
-    @OneToOne(mappedBy ="employee")
+    @OneToOne(mappedBy ="employee",cascade = CascadeType.ALL)
     private EmployeeProfile employeeProfile;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "emp_id")
-    private List<Salary> salaryList=new ArrayList<>();
+    private List<Salary> salary=new ArrayList<>();
 
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     @JoinTable(name = "Emplyee_Company", joinColumns = @JoinColumn(name = "emp_id"), inverseJoinColumns = @JoinColumn(name = "com_id"))
-    private List<Company> companies= new ArrayList<>();
+    private List<Company> company= new ArrayList<>();
 
     public Employee() {
     }
@@ -94,20 +94,20 @@ public class Employee implements Serializable {
         this.nationalCode = nationalCode;
     }
 
-    public List<Salary> getSalaryList() {
-        return salaryList;
+    public List<Salary> getSalary() {
+        return salary;
     }
 
-    public void setSalaryList(List<Salary> salaryList) {
-        this.salaryList = salaryList;
+    public void setSalary(List<Salary> salary) {
+        this.salary = salary;
     }
 
-    public List<Company> getCompanies() {
-        return companies;
+    public List<Company> getCompany() {
+        return company;
     }
 
-    public void setCompanies(List<Company> companies) {
-        this.companies = companies;
+    public void setCompany(List<Company> company) {
+        this.company = company;
     }
 
     public EmployeeProfile getEmployeeProfile() {
