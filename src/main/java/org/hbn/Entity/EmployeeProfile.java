@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class EmployeeProfile implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column
+    @Column(name="ep_id")
     private Long id;
     @Column
     private String userName;
@@ -17,20 +17,15 @@ public class EmployeeProfile implements Serializable {
     @Column
     private String email;
 
-    @OneToOne
-    @JoinColumn(name = "emp_id")
-    private Employee employee;
-
     public EmployeeProfile() {
 
     }
 
-    public EmployeeProfile(Long id, String userName, String password, String email, Employee employee) {
+    public EmployeeProfile(Long id, String userName, String password, String email) {
         this.id = id;
         this.userName = userName;
         this.password = password;
         this.email = email;
-        this.employee = employee;
     }
 
 }

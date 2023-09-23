@@ -51,17 +51,15 @@ public class Main {
 
             }
 
-            entityManager.close();
-            entityManagerFactory.close();
-
         } catch
         (Exception e) {
             System.out.println(e.getMessage());
             e.getCause();
             e.getStackTrace();
         } finally {
-            entityManager.close();
-            entityManagerFactory.close();
+       //     entityManager.close();
+         //   entityManagerFactory.close();
+            System.out.println("the end!!!!!!!");
         }
 
     }
