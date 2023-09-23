@@ -17,6 +17,10 @@ public class EmployeeProfile implements Serializable {
     @Column
     private String email;
 
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "emp_id", referencedColumnName = "emp_id")
+    private Employee employee;
+
     public EmployeeProfile() {
 
     }
@@ -28,4 +32,43 @@ public class EmployeeProfile implements Serializable {
         this.email = email;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
 }

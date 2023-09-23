@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 ;
+
 @Entity
 @Table(name = "salaries")
 public class Salary implements Serializable {
@@ -22,12 +23,16 @@ public class Salary implements Serializable {
     @Column
     Double currentSalary;
     @Column
-    private  Boolean activeFlag;
+    private Boolean activeFlag;
 
     @Column
     String title;
 
-    public Salary(){}
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Employee employee;
+
+    public Salary() {
+    }
 
     public Salary(Long id, Integer bonusPercentage, Double stratingSalary, Double currentSalary, Boolean activeFlag, String title) {
         this.id = id;

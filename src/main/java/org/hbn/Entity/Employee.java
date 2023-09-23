@@ -3,8 +3,11 @@ package org.hbn.Entity;
 import jakarta.persistence.*;
 import org.hbn.Utils.Exceptions.Exceptions;
 import org.hbn.Utils.IranUtils.CheckNationalCode;
-
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hbn.Entity.EmployeeProfile;
 
 @Entity
 @Table(name = "employees")
@@ -22,6 +25,17 @@ public class Employee implements Serializable {
     @Column(name = "emp_nationalCode", length = 10, unique = true)
     private String nationalCode;
 
+    @OneToOne(mappedBy ="employee")
+    private EmployeeProfile employeeProfile;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "emp_id")
+    private List<Salary> salaryList=new ArrayList<>();
+
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+    @JoinTable(name = "Emplyee_Company", joinColumns = @JoinColumn(name = "emp_id"), inverseJoinColumns = @JoinColumn(name = "com_id"))
+    private List<Company> companies= new ArrayList<>();
+
     public Employee() {
     }
 
@@ -31,6 +45,8 @@ public class Employee implements Serializable {
         setLname(lname);
         setNationalCode(nationalCode);
     }
+
+
 
     public Long getId() {
         return id;
@@ -78,5 +94,27 @@ public class Employee implements Serializable {
         this.nationalCode = nationalCode;
     }
 
+    public List<Salary> getSalaryList() {
+        return salaryList;
+    }
 
+    public void setSalaryList(List<Salary> salaryList) {
+        this.salaryList = salaryList;
+    }
+
+    public List<Company> getCompanies() {
+        return companies;
+    }
+
+    public void setCompanies(List<Company> companies) {
+        this.companies = companies;
+    }
+
+    public EmployeeProfile getEmployeeProfile() {
+        return employeeProfile;
+    }
+
+    public void setEmployeeProfile(EmployeeProfile employeeProfile) {
+        this.employeeProfile = employeeProfile;
+    }
 }

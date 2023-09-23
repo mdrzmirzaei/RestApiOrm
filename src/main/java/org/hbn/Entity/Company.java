@@ -4,6 +4,8 @@ package org.hbn.Entity;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="Companies")
@@ -26,6 +28,10 @@ public class Company implements Serializable {
     @Column(name = "cmp_country")
     private String country;
 
+
+    @ManyToMany(mappedBy = "companies")
+    private List<Employee> employeeList=new ArrayList<>();
+
     public Company(){}
 
     public Company(Long id, String name, String city, String state, String country) {
@@ -33,6 +39,13 @@ public class Company implements Serializable {
         this.name = name;
         this.city = city;
         this.state = state;
+        this.country = country;
+    }
+
+
+    public Company(String name, String city, String country) {
+        this.name = name;
+        this.city = city;
         this.country = country;
     }
 
