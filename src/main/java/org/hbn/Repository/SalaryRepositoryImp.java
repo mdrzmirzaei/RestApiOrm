@@ -1,6 +1,7 @@
 package org.hbn.Repository;
 
 import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 import org.hbn.Entity.Salary;
 
 import java.util.Optional;
@@ -8,6 +9,10 @@ import java.util.Optional;
 public class SalaryRepositoryImp implements SalaryRepository {
 
     private EntityManager entityManager;
+
+    public SalaryRepositoryImp(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
 
     @Override
     public Optional<Salary> save(Salary salary) {
@@ -37,6 +42,7 @@ public class SalaryRepositoryImp implements SalaryRepository {
     }
 
     @Override
+
     public void deleteSalary(Salary salary) {
         entityManager.getTransaction().begin();
         if (entityManager.contains(salary)) {

@@ -1,6 +1,7 @@
 package org.hbn.Entity;
 
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 
 import java.io.Serializable;
 
@@ -21,12 +22,12 @@ public class Salary implements Serializable {
     private Double stratingSalary;
 
     @Column
-    Double currentSalary;
+    private Double currentSalary;
     @Column
     private Boolean activeFlag;
 
     @Column
-    String title;
+    private String title;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Employee employee;

@@ -1,11 +1,16 @@
 package org.hbn.Repository;
 
 import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 import org.hbn.Entity.Company;
 import java.util.Optional;
 
 public class CompanyRepositoyImp implements CompanyRepository {
     private EntityManager entityManager;
+
+    public CompanyRepositoyImp(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
 
     @Override
     public Optional<Company> save(Company company) {

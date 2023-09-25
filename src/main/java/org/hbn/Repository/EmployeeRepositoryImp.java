@@ -1,12 +1,17 @@
 package org.hbn.Repository;
 
+import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
+import jakarta.persistence.Transient;
 import jakarta.transaction.Transactional;
 import org.hbn.Entity.Employee;
 
+import java.util.List;
 import java.util.Optional;
 
-@Transactional
+
+
 public class EmployeeRepositoryImp implements EmployeeRepository {
     private EntityManager entityManager;
 
@@ -15,15 +20,18 @@ public class EmployeeRepositoryImp implements EmployeeRepository {
     }
 
     @Override
+
     public Optional<Employee> save(Employee employee) {
         try {
-            entityManager.getTransaction().begin();
+               entityManager.getTransaction().begin();
             if (employee.getId() == null) {
+                if (employee.getEmployeeProfile() != null)
+                    entityManager.persist(employee.getEmployeeProfile());
                 entityManager.persist(employee);
             } else {
                 entityManager.merge(employee);
             }
-            entityManager.getTransaction().commit();
+                  entityManager.getTransaction().commit();
             return Optional.of(employee);
 
         } catch (Exception e) {
@@ -51,5 +59,14 @@ public class EmployeeRepositoryImp implements EmployeeRepository {
         }
         entityManager.getTransaction().commit();
         System.out.println("the employee is deleted ");
+    }
+
+
+    @Override
+    public List<Employee> findByName(String name) {
+        Query query=entityManager.createQuery("select emp from Employee as emp where emp.fname = :entername");
+        query.setParameter("entername",name);
+        List employeeList=query.getResultList();
+        return employeeList;
     }
 }

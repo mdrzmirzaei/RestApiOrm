@@ -1,6 +1,7 @@
 package org.hbn.Entity;
 
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 import org.hbn.Utils.Exceptions.Exceptions;
 import org.hbn.Utils.IranUtils.CheckNationalCode;
 import java.io.Serializable;
@@ -11,6 +12,9 @@ import org.hbn.Entity.EmployeeProfile;
 
 @Entity
 @Table(name = "employees")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//@Inheritance(strategy = InheritanceType.JOINED)
+//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Employee implements Serializable {
 
     @Id
@@ -33,8 +37,8 @@ public class Employee implements Serializable {
     private List<Salary> salary=new ArrayList<>();
 
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
-    @JoinTable(name = "Emplyee_Company", joinColumns = @JoinColumn(name = "emp_id"), inverseJoinColumns = @JoinColumn(name = "com_id"))
-    private List<Company> company= new ArrayList<>();
+    @JoinTable(name = "Employee_Company", joinColumns = @JoinColumn(name = "emp_id"), inverseJoinColumns = @JoinColumn(name = "cmp_id"))
+    private List<Company> companyList= new ArrayList<>();
 
     public Employee() {
     }
@@ -103,11 +107,11 @@ public class Employee implements Serializable {
     }
 
     public List<Company> getCompany() {
-        return company;
+        return companyList;
     }
 
     public void setCompany(List<Company> company) {
-        this.company = company;
+        this.companyList = company;
     }
 
     public EmployeeProfile getEmployeeProfile() {

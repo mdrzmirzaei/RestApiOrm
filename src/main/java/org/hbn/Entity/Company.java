@@ -2,6 +2,7 @@ package org.hbn.Entity;
 
 
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class Company implements Serializable {
     private String country;
 
 
-    @ManyToMany(mappedBy = "company")
+    @ManyToMany(mappedBy = "companyList")
     private List<Employee> employeeList=new ArrayList<>();
 
     public Company(){}

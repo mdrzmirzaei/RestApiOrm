@@ -25,11 +25,21 @@ public class EmployeeProfile implements Serializable {
 
     }
 
-    public EmployeeProfile(Long id, String userName, String password, String email) {
+    public EmployeeProfile(Long id, String userName, String password, String email, Employee employee) {
         this.id = id;
         this.userName = userName;
         this.password = password;
         this.email = email;
+        this.setEmployee(employee);
+    }
+
+
+    public EmployeeProfile( String userName, String password, String email, Employee employee) {
+
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+        this.setEmployee(employee);
     }
 
     public String getUserName() {

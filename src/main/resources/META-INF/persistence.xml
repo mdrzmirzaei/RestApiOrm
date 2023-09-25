@@ -15,7 +15,7 @@
             <property name="jakarta.persistence.jdbc.url" value="jdbc:oracle:thin:@192.168.101.142:1521/xe"/>
             <property name="jakarta.persistence.jdbc.user" value="amirza"/>
             <property name="jakarta.persistence.jdbc.password" value="amirza"/>
-            <property name="jakarta.persistence.schema-generation.database.action" value="create"/>
+            <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
             <property name="jakarta.persistence.sql-load-script-source" value="data.sql"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle12cDialect"/>
         </properties>

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Transactional
+
 public class Main {
 
     private static List<Salary> generatSalaries() {
@@ -45,33 +45,49 @@ public class Main {
 
         System.out.println("pls wait...");
         try {
-
             entityManagerFactory = Persistence.createEntityManagerFactory("default");
             entityManager = entityManagerFactory.createEntityManager();
             EmployeeRepositoryImp employeeRepository = new EmployeeRepositoryImp(entityManager);
 
 
-            Employee employee = new Employee();
-            employee.setFname("محمدرضا");
-            employee.setLname("میرزایی");
-            employee.setNationalCode("0078061210");
+            Employee employee1 = new Employee();
+            employee1.setFname("محمدرضا");
+            employee1.setLname("میرزایی");
+            employee1.setNationalCode("0078061210");
 
+            employee1.setEmployeeProfile(new EmployeeProfile("123","pass1","mdrz.mirzaei@gmail.com",employee1));
 
-            EmployeeProfile ep = new EmployeeProfile();
-            ep.setEmail("mdrz.mirzaei@gmail.com");
-            ep.setPassword("123");
-            ep.setUserName("amirza");
-            ep.setEmployee(employee);
-            employee.setEmployeeProfile(ep);
 
             // set Salaries data for current employee
-            employee.setSalary(generatSalaries().stream().toList());
+            employee1.setSalary(generatSalaries().stream().toList());
 
             //set companies data for current employee
-            employee.setCompany(generateCompanies().stream().toList());
+            employee1.setCompany(generateCompanies().stream().toList());
 
             // persist current employee with data of profile,salaries & companies
-            employeeRepository.save(employee);
+            employeeRepository.save(employee1);
+
+            Employee employee2 = new Employee();
+            employee2.setFname("hadi");
+            employee2.setLname("zare");
+            employee2.setNationalCode("0078535174");
+
+            employee2.setEmployeeProfile(new EmployeeProfile("456","pass2","mohammadreza@yahoo.com", employee2));
+
+
+            // persist current employee with data of profile,salaries & companies
+            employeeRepository.save(employee2);
+
+
+            List<Employee> ee=employeeRepository.findByName("محمدرضا");
+            for (int i = 0; i < ee.size(); i++) {
+                System.out.println(ee.get(i).getLname()+" " + ee.get(i).getFname()+ "   and national code is " + ee.get(i).getNationalCode());
+                System.out.println(ee.get(i).getEmployeeProfile().getEmail());
+
+            }
+
+entityManager.close();
+entityManagerFactory.close();
 
 /*         Employee e = new Employee();
             e.setFname("hadi");
